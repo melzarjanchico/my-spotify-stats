@@ -12,7 +12,7 @@ More features might be coming soon (don't count on it lmao).
  
  Although, when you try to authorize your Spotify account to use it, it won't allow you since it's still in development mode. Still need to apply to Spotify to evaluate the app for a [quota extension](https://developer.spotify.com/documentation/web-api/concepts/quota-modes).
 
- If you really need to, just hmu [@melzarjanchico](melzarjanchico@gmail.com) to include you in the allowlist.
+ If you really need to, just hmu [@melzarjanchico](mailto:melzarjanchico@gmail.com) to include you in the allowlist.
 
 ## Local Development
 
