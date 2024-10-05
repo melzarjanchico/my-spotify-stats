@@ -15,8 +15,9 @@ export class SpotifyAuthorizationService {
     static CLIENT_ID = `${import.meta.env.VITE_CLIENT_ID}`;
     static CLIENT_SECRET = `${import.meta.env.VITE_CLIENT_SECRET}`;
     static CLIENT_URL = `${import.meta.env.VITE_URL}`;
+    static MODE = `${import.meta.env.VITE_NODE_ENV}`
 
-    static REDIRECT_URI = `${this.CLIENT_URL}/callback`;
+    static REDIRECT_URI = (this.MODE === "production") ? `${this.CLIENT_URL}/callback` : "http://localhost:8069/callback";
     
     // * Client Creds Flow: Useful for endpoints with no authorization needed.
     // static async fetchTokenNoAuth(): Promise<string> {
