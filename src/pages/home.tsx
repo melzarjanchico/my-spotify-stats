@@ -16,7 +16,7 @@ const HomePage = () => {
     const [accessToken, setAccessToken] = useState<StoredAccessToken | null>(() => {
         const storedToken = localStorage.getItem('access_token');
         try {
-            return storedToken ? JSON.parse(storedToken) : null;
+            return storedToken ? (JSON.parse(storedToken) as StoredAccessToken) : null;
         } catch (error) {
             console.error("Failed to parse access token from localStorage", error);
             return null;
@@ -78,13 +78,13 @@ const HomePage = () => {
 
                 } else if (profile.status === "error" && profile.type === "expired-access-token") {
                     // console.log(profile)
-                    refreshToken();
+                    void refreshToken();
                 }
 
             }
         };
 
-        getProfile();
+        void getProfile();
     }, [accessToken, refreshToken])
 
     return (

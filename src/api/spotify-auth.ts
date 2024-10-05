@@ -198,7 +198,7 @@ export class SpotifyAuthorizationService {
           redirect_uri: this.REDIRECT_URI,
           state: state,
           //show_dialog: 'true'
-        });
+        }).toString();
 
       window.location.href = authUrl.toString();
     };

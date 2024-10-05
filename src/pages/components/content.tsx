@@ -55,13 +55,13 @@ const Content = (props: ContentProps) => {
         };
 
         if (!topTracks) {
-            getTopTracks();
+            void getTopTracks();
         }
 
     }, [accessToken, topTracks, term])
 
 
-    const addNewItemList = async (retryCount:number = 0) => {
+    const addNewItemList = async (retryCount = 0) => {
         if (retryCount > 1) {
             // Prevent infinite loop by limiting retries
             throw new Error("Failed refetching token in fetching more top songs.");
@@ -95,7 +95,7 @@ const Content = (props: ContentProps) => {
         activateTextTruncateScroll({ scrollSpeed: 40 });
     }
 
-    const setTrackTimeRange = async (timerange: string, retryCount:number = 1) => {
+    const setTrackTimeRange = async (timerange: string, retryCount = 1) => {
         if (retryCount > 1) {
             // Prevent infinite loop by limiting retries
             throw new Error("Failed refetching token in fetching top list by time range.");
@@ -219,7 +219,7 @@ const Content = (props: ContentProps) => {
                         <div className="flex gap-1 text-xs md:text-sm">
                             {
                                 timerangeSelections.map((timerange) => (
-                                    <div className="flex-shrink-0" onClick={() => {setTrackTimeRange(timerange.id)}} key={timerange.id}>
+                                    <div className="flex-shrink-0" onClick={() => {void setTrackTimeRange(timerange.id)}} key={timerange.id}>
                                         <span className={"inline-block px-3.5 py-1.5 rounded-md" + (timerange.id === term ? timerange_selected : timerange_unselected)}>{timerange.name}</span>
                                     </div>
                                 ))
@@ -230,8 +230,8 @@ const Content = (props: ContentProps) => {
                     {/* List */}
                     <div className="flex flex-col gap-1.5 overflow-hidden">
 
-                        {topTracks && topTracks.items &&
-                            topTracks.items.map((track, index) => (
+                        {topTracks?.items
+                            .map((track, index) => (
                                 <div className={"flex flex-row place-items-center rounded-md border" + listitem_unselected} key={track.id} onClick={() => {handleSelection(track.id)}}>
                                     
                                     
@@ -252,7 +252,7 @@ const Content = (props: ContentProps) => {
                                     <div className="min-w-4 mx-2.5 truncate">
                                         <div className="flex flex-col">
                                             <div className="flex flex-row place-items-center gap-1.5">
-                                                {currentTrack && currentTrack.item && (track.id === currentTrack.item.id) &&
+                                                {currentTrack?.item && (track.id === currentTrack.item.id) &&
                                                     <div className="ms-0.5">
                                                         <Tooltip content={nowPlayingTooltipContent(currentTrack, false)} arrow={true} theme={getTooltipTheme(currentTrack.is_playing)}>
                                                             <FontAwesomeIcon icon={faHeadphones} className={"w-2.5 md:w-3" + nowPlayingIcon(currentTrack)}/>
@@ -318,7 +318,7 @@ const Content = (props: ContentProps) => {
                     {/* Selector */}
                     {topTracks && ((offset + limit) < 100) ?
                         <div className="flex justify-center">
-                            <button className="text-sm py-1.5" onClick={() => addNewItemList()}>See More</button>
+                            <button className="text-sm py-1.5" onClick={() => void addNewItemList()}>See More</button>
                         </div> :
                         <div className="flex justify-center">
                             <button className="text-sm py-1.5" onClick={() => {window.scrollTo({ top: 0, behavior: "smooth" })}}>Back to Top</button>

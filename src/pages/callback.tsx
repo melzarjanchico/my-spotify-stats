@@ -26,7 +26,7 @@ const CallbackPage = () => {
     const [accessToken, setAccessToken] = useState<StoredAccessToken | null>(() => {
         const storedToken = localStorage.getItem('access_token');
         try {
-            return storedToken ? JSON.parse(storedToken) : null;
+            return storedToken ? (JSON.parse(storedToken) as StoredAccessToken) : null;
         } catch (error) {
             console.error("Failed to parse access token from localStorage", error);
             return null;
@@ -34,7 +34,7 @@ const CallbackPage = () => {
     });
 
     // Home page conditionals after Spotify URL authorization
-    const isError = userAuthError || (userAuthState && userAuthState !== appState);
+    const isError = userAuthError ?? (userAuthState && userAuthState !== appState);
     const isSuccess = userAuthCode && userAuthState;
     const isLoading = !isError && !isSuccess;
 
@@ -88,7 +88,7 @@ const CallbackPage = () => {
                 console.error("Failed to fetch token:", err);
             }
         };
-        fetchData();
+        void fetchData();
 
     }, [accessToken, userAuthCode, userAuthState, navigate]);
 

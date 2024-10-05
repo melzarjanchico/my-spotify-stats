@@ -19,15 +19,15 @@ export const getTooltipTheme = (isPlaying: boolean) => {
     };
 }
 export const nowPlayingIcon = (currentTrack: CurrentTrackSuccessResponse)  => {
-    if (currentTrack && currentTrack.is_playing) {
+    if (currentTrack?.is_playing) {
         return " fa-beat icon-beat text-green-400"
     } else {
         return " text-orange-400"
     }
 }
 
-export const nowPlayingTooltipContent = (currentTrack: CurrentTrackSuccessResponse, forProfile: boolean = true) => {
-    if (currentTrack && currentTrack.is_playing) {
+export const nowPlayingTooltipContent = (currentTrack: CurrentTrackSuccessResponse, forProfile = true) => {
+    if (currentTrack?.is_playing) {
         return forProfile ? "Online" : "Currently Playing"
     } else {
         return forProfile ? "Away" : "Currently Paused"

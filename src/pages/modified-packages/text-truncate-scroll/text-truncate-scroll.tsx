@@ -1,5 +1,5 @@
 // Credits to @jayli3n (https://github.com/jayli3n/text-truncate-scroll)
-// I just converted to TypeScript + vertical-align for the <span>'s
+// I just converted to TypeScript + vertical-align for the <span>'s + lint errors
 
 export interface IOptions {
     className?: string;
@@ -8,12 +8,11 @@ export interface IOptions {
 }
 
 export const activateTextTruncateScroll = (options: IOptions) => {
-    const timeoutBeforeInit = (options?.timeoutBeforeInit) || 90;
+    const timeoutBeforeInit = (options?.timeoutBeforeInit) ?? 90;
     setTimeout(() => {
-        const className = (options?.className) || "text-truncate-scroll";
+        const className = (options?.className) ?? "text-truncate-scroll";
         const elements = document.querySelectorAll(`.${className}:not([text-truncate-scroll-activated])`);
-        for (let i = 0; i < elements.length; i++) {
-            const element = elements[i];
+        for (const element of elements) {
             if (element.parentElement) {
                 configureOneElement(element, options);
             }
@@ -22,7 +21,7 @@ export const activateTextTruncateScroll = (options: IOptions) => {
 };
 
 const configureOneElement = (element: Element, options: IOptions) => {
-    const scrollSpeed = (options?.scrollSpeed) || 60;
+    const scrollSpeed = (options?.scrollSpeed) ?? 60;
     const parentElement = element.parentElement;
     element.setAttribute("text-truncate-scroll-activated", "");
     const span1 = document.createElement("span");
@@ -44,10 +43,10 @@ const configureOneElement = (element: Element, options: IOptions) => {
     styles.textContent = generateStyles({ elementClassName, span1ClassName, span2ClassName });
     if (parentElement) {
         const styleElements = parentElement.getElementsByTagName("style");
-        for (let i = 0; i < styleElements.length; i++) {
-            const styleElement = styleElements[i];
+        for (const styleElement of styleElements) {
             const usedByClass = styleElement.getAttribute("text-truncate-style-for");
-            const usedByElements = parentElement.getElementsByClassName(usedByClass || "");
+            const usedByElements = parentElement.getElementsByClassName(usedByClass ?? "");
+            
             if (!usedByElements.length) {
                 parentElement.removeChild(styleElement);
             }
@@ -57,7 +56,7 @@ const configureOneElement = (element: Element, options: IOptions) => {
     const calculate = () => {
         span2.style.width = "auto";
         const span2Width = span2.clientWidth || 0;
-        const span1Width = span2.parentElement?.clientWidth || 0;
+        const span1Width = span2.parentElement?.clientWidth ?? 0;
         const transformStyles = span2Width > span1Width ? `translateX(calc(-100% + ${span1Width}px - 5px))` : "";
         const transitionStyles = `all ${(span2Width - span1Width) / scrollSpeed}s linear`;
         styles.textContent = generateStyles({
@@ -121,8 +120,8 @@ const generateStyles = (styles: generateStyles) => `
 .${styles.elementClassName}:focus .${styles.span2ClassName}, 
 .${styles.elementClassName}:active .${styles.span2ClassName} {
     width: auto;
-    transform: ${styles.transformStyles || ""};
-    transition: ${styles.transitionStyles || ""};
+    transform: ${styles.transformStyles ?? ""};
+    transition: ${styles.transitionStyles ?? ""};
 }`;
 
 const generateUniqueId = () => {

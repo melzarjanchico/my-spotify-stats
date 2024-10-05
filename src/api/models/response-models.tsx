@@ -1,4 +1,4 @@
-import { Track, User } from "../../pages/model/objects"
+import { Track } from "../../pages/model/objects"
 
 export interface SpotityMainServiceResponse {
     status: string,
@@ -15,9 +15,9 @@ export interface SpotifyMainServiceErrorResponse {
     }
 }
 
-export interface CurrentUserSuccessResponse extends User {
+// export interface CurrentUserSuccessResponse extends User {
     
-}
+// }
 
 export interface CurrentTrackSuccessResponse {
     currently_playing_type: string,

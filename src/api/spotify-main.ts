@@ -1,4 +1,5 @@
-import { CurrentTrackSuccessResponse, CurrentUserSuccessResponse, SpotifyMainServiceErrorResponse, SpotityMainServiceResponse, TopTracksSuccessResponse } from "./models/response-models";
+import { CurrentTrackSuccessResponse, SpotifyMainServiceErrorResponse, SpotityMainServiceResponse, TopTracksSuccessResponse } from "./models/response-models";
+import { User as CurrentUserSuccessResponse } from "../pages/model/objects";
 
 export class SpotifyMainService {
     static API_URL = "https://api.spotify.com/v1";

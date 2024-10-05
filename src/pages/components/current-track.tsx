@@ -46,7 +46,7 @@ const CurrentTrack = (props: CurrentTrackProps) => {
             activateTextTruncateScroll({ scrollSpeed: 40 });
         };
 
-        getCurrentTrack();
+        void getCurrentTrack();
     }, [accessToken])
 
     useEffect(() => {
@@ -95,7 +95,7 @@ const CurrentTrack = (props: CurrentTrackProps) => {
                     }
 
                     {/* Has track currently playing */}
-                    {currentTrack && currentTrack.item &&
+                    {currentTrack?.item &&
                         <div className="flex flex-row place-items-center">
                             {currentTrack.item.album.images.length ?
                                 <img className="rounded-s-md w-14 h-14 min-w-14 min-h-14 flex-shrink-0" src={currentTrack.item.album.images[2].url} loading="lazy" draggable={false}/> :
