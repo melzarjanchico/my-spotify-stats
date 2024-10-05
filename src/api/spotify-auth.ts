@@ -14,9 +14,9 @@ export class SpotifyAuthorizationService {
     static API_URL = "https://accounts.spotify.com/api/token";
     static CLIENT_ID = `${import.meta.env.VITE_CLIENT_ID}`;
     static CLIENT_SECRET = `${import.meta.env.VITE_CLIENT_SECRET}`;
-    static SITE_URL = `${import.meta.env.VITE_URL}`;
+    static CLIENT_URL = `${import.meta.env.VITE_URL}`;
 
-    static REDIRECT_URI = `${window.location.protocol}//${window.location.hostname}/callback`;
+    static REDIRECT_URI = `${this.CLIENT_URL}/callback`;
     
     // * Client Creds Flow: Useful for endpoints with no authorization needed.
     // static async fetchTokenNoAuth(): Promise<string> {
