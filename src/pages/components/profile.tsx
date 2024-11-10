@@ -22,6 +22,9 @@ const Profile = (props: ProfileProps) => {
     const isLoading = !profile || !accessToken;
     const isSuccess = profile && accessToken;
 
+    // Find the image with the largest dimensions (assuming width and height are equal).
+    const largestImage = profile?.images.reduce((max, image) => (image.width > max.width ? image : max));
+
     return (
         <>
             <div className="flex flex-col py-4 gap-2 items-center border rounded-md shadow md:flex-row md:p-0 md:gap-6 border-zinc-700 bg-zinc-800 overflow-hidden">
@@ -39,7 +42,7 @@ const Profile = (props: ProfileProps) => {
                         {/* Profile Picture */}
                         <img 
                             className="object-cover rounded-full max-w-56 border border-zinc-700 bg-zinc-800 md:h-auto md:max-w-64 md:rounded-none md:rounded-s-md md:m-0 md:border-0" 
-                            src={profile.images[1].url} 
+                            src={largestImage?.url} 
                             alt="Profile"
                             draggable={false}
                         /> 
